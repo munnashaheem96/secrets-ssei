@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Secrets of SSEI — Anonymous Confessions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+    .glass { backdrop-filter: blur(10px); background: rgba(255,255,255,0.08); }
+  </style>
+  <!-- Open Graph for sharing -->
+  <meta property="og:title" content="Secrets of SSEI — Anonymous Confessions" />
+  <meta property="og:description" content="Drop your secret anonymously. We'll share selected ones on Instagram: @secrets.of.ssei" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://secrets.justsomemallus.in" />
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
+  <div class="max-w-3xl mx-auto px-4 py-10">
+    <header class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs bg-slate-700/50 border border-slate-600">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Anonymous & secure — we don’t collect names or IPs
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold mt-4">Secrets of SSEI</h1>
+      <p class="text-slate-300 mt-2">Drop your secret <em>anonymously</em>. Selected secrets will be posted on
+        <a href="https://instagram.com/secrets.of.ssei" target="_blank" rel="noopener" class="underline decoration-dotted hover:text-white">@secrets.of.ssei</a>.
+      </p>
+    </header>
+
+    <main class="glass rounded-2xl p-6 md:p-8 border border-white/10 shadow-xl">
+      <form id="confessionForm" class="space-y-6" autocomplete="off" novalidate>
+        <!-- honeypot -->
+        <input type="text" name="website" id="website" class="hidden" tabindex="-1" autocomplete="off" />
+
+        <div>
+          <label for="secret" class="block text-sm font-medium mb-1">Secret <span class="text-pink-400">*</span></label>
+          <textarea id="secret" name="secret" required minlength="10" maxlength="1000" rows="5"
+            class="w-full rounded-xl border border-slate-600 bg-slate-800/70 p-3 outline-none focus:ring-2 focus:ring-pink-500/60"
+            placeholder="Write your secret… (min 10 characters)"></textarea>
+          <div class="flex justify-between text-xs mt-1 text-slate-400">
+            <span>Keep it respectful. No hate speech or personal data.</span>
+            <span id="secretCount">0/1000</span>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label for="from" class="block text-sm font-medium mb-1">From (optional)</label>
+            <input id="from" name="from" type="text" maxlength="50" class="w-full rounded-xl border border-slate-600 bg-slate-800/70 p-3 outline-none focus:ring-2 focus:ring-pink-500/60" placeholder="e.g., 3rd year CSE" />
+          </div>
+          <div>
+            <label for="to" class="block text-sm font-medium mb-1">To (optional)</label>
+            <input id="to" name="to" type="text" maxlength="50" class="w-full rounded-xl border border-slate-600 bg-slate-800/70 p-3 outline-none focus:ring-2 focus:ring-pink-500/60" placeholder="e.g., Someone special" />
+          </div>
+        </div>
+
+        <div>
+          <label for="hint" class="block text-sm font-medium mb-1">Hint <span class="text-pink-400">*</span></label>
+          <input id="hint" name="hint" type="text" required minlength="3" maxlength="100"
+            class="w-full rounded-xl border border-slate-600 bg-slate-800/70 p-3 outline-none focus:ring-2 focus:ring-pink-500/60"
+            placeholder="Give a small hint, not personal info" />
+          <p class="text-xs text-slate-400 mt-1">Example: “lab partner from ECE”, “met at canteen”, etc.</p>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs text-slate-400">
+          <input id="agree" type="checkbox" class="rounded border-slate-600 bg-slate-800/70" required />
+          <label for="agree">I understand my submission may be moderated before posting.</label>
+        </div>
+
+        <button id="submitBtn" type="submit" class="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 bg-pink-600 hover:bg-pink-500 active:scale-[.99] disabled:opacity-60 disabled:cursor-not-allowed font-semibold">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M2.3 2.3a1 1 0 0 1 1.04-.24l18 6a1 1 0 0 1 0 1.88l-7.58 2.84-2.84 7.58a1 1 0 0 1-1.88 0l-6-18a1 1 0 0 1 .26-1.06Zm3.2 3.2 4.3 12.9 2.06-5.5a1 1 0 0 1 .6-.6L18.6 10.2l-13.1-4.7Z"/></svg>
+          Submit Secret
+        </button>
+
+        <p id="statusMsg" class="hidden text-sm"></p>
+      </form>
+
+      <p class="text-xs text-slate-400 mt-6">Privacy: We use anonymous authentication and do not store names, emails, phone numbers, or IP addresses. Don’t include anyone’s personal data in the message.</p>
+    </main>
+
+    <footer class="text-center text-xs text-slate-400 mt-8">
+      &copy; <span id="year"></span> Secrets of SSEI • Hosted at <span class="font-medium">secrets.justsomemallus.in</span>
+    </footer>
+  </div>
+
+  <!-- Firebase SDKs (v10+) -->
+  <script type="module">
+    // --- OPTIONAL: Remove this block if you use a different backend service ---
+    // Replace with your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyD6UwsVL3aT5PME-gLa1B9v_8GrlRtluIE",
+      authDomain: "login-rolebased.firebaseapp.com",
+      projectId: "login-rolebased",
+      storageBucket: "login-rolebased.firebasestorage.app",
+      messagingSenderId: "689470574394",
+      appId: "1:689470574394:web:1b51f731ce4ba7f16dca03"
+    };
+
+    // Import Firebase modules
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+    import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+    import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // Ensure anonymous sign-in
+    signInAnonymously(auth).catch(console.error);
+
+    // UI Elements
+    const form = document.getElementById('confessionForm');
+    const btn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    const secret = document.getElementById('secret');
+    const hint = document.getElementById('hint');
+    const fromEl = document.getElementById('from');
+    const toEl = document.getElementById('to');
+    const secretCount = document.getElementById('secretCount');
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
+
+    // Live character counter
+    secret.addEventListener('input', () => {
+      secretCount.textContent = `${secret.value.length}/1000`;
+    });
+
+    // Basic profanity blocklist (very light). Consider replacing with server-side moderation.
+    const badWords = ["suicide","kill","murder","hate","rape"]; // simple example
+    function containsBadWords(text) {
+      const lower = text.toLowerCase();
+      return badWords.some(w => lower.includes(w));
+    }
+
+    // Submit handler
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Honeypot check
+      if (document.getElementById('website').value) return; // bot
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (containsBadWords(secret.value)) {
+        showStatus('Your message contains disallowed words. Please rephrase.', true);
+        return;
+      }
+
+      btn.disabled = true;
+      showStatus('Submitting…');
+
+      try {
+        // Wait for anonymous auth just in case
+        await new Promise((resolve) => {
+          const unsub = onAuthStateChanged(auth, (u) => { if (u) { unsub(); resolve(); } });
+        });
+
+        // Save to Firestore (no IP collected)
+        await addDoc(collection(db, 'confessions'), {
+          secret: secret.value.trim(),
+          from: (fromEl.value || '').trim(),
+          to: (toEl.value || '').trim(),
+          hint: hint.value.trim(),
+          ua: navigator.userAgent.slice(0, 120), // harmless metadata
+          createdAt: serverTimestamp(),
+          status: 'pending' // for moderation pipeline
+        });
+
+        form.reset();
+        secretCount.textContent = '0/1000';
+        showStatus('✅ Submitted anonymously! Thanks.');
+      } catch (err) {
+        console.error(err);
+        showStatus('Something went wrong. Please try again later.', true);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    function showStatus(msg, isError = false) {
+      statusMsg.classList.remove('hidden');
+      statusMsg.textContent = msg;
+      statusMsg.className = `text-sm mt-2 ${isError ? 'text-red-400' : 'text-emerald-300'}`;
+    }
+  </script>
+
+  <!-- If you prefer a no-backend option, comment out the Firebase script above and paste a Formspree/Basin endpoint here. -->
+</body>
+  
+</html>
+
+<!-- ========================= ADMIN PAGE (SAVE AS admin.html) ========================= -->
+<!--
+  Create a new file named `admin.html` with the contents below.
+  This page is protected by Firebase Email/Password auth. Only signed-in users can view/update.
+  See the Firestore security rules after this file to restrict write access to specific admin UIDs.
+-->
+
+
+
+<!-- ========================= FIRESTORE SECURITY RULES ========================= -->
+<!-- Paste the following in Firestore Rules to restrict write actions to admin users only. -->
+<!--
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public can create (from the public form), cannot read.
+    match /confessions/{docId} {
+      allow create: if request.time < timestamp.date(2100,1,1)
+        && request.resource.data.secret is string
+        && request.resource.data.hint is string
+        && request.resource.data.secret.size() >= 10
+        && request.resource.data.secret.size() <= 1000
+        && request.resource.data.hint.size() >= 3
+        && request.resource.data.hint.size() <= 100
+        && !(request.resource.data.keys().hasAny(['ip','email','phone']));
+      allow read: if false; // hide raw submissions from public
+      allow update, delete: if request.auth != null &&
+        request.auth.uid in [
+          // TODO: Replace with your Firebase Auth user IDs allowed to moderate
+          'ADMIN_UID_1', 'ADMIN_UID_2'
+        ];
+    }
+  }
+}
+-->
