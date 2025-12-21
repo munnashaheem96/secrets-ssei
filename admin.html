@@ -5,13 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Secrets of SSEI</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="./css/style.css">
 
 <style>
   html, body { font-family: Inter, sans-serif; }
+
+  /* Buttons */
+  .btn {
+    padding: 14px 0;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 14px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Action bar grid */
+  .action-bar {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  @media (max-width: 640px) {
+    .action-bar {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .action-bar button:last-child {
+      grid-column: span 2;
+    }
+  }
 </style>
 </head>
 
@@ -19,13 +43,13 @@
 
 <!-- NAVBAR -->
 <nav class="sticky top-0 z-50 backdrop-blur bg-slate-900/80 border-b border-slate-700">
-  <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+  <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
     <div>
       <h1 class="text-xl font-bold tracking-wide">Secrets of SSEI</h1>
       <p class="text-xs text-slate-400">Admin Moderation Panel</p>
     </div>
     <button id="logoutBtn"
-      class="hidden px-5 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 font-semibold">
+      class="hidden px-6 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 font-semibold">
       Logout
     </button>
   </div>
@@ -51,7 +75,7 @@
 <!-- DASHBOARD -->
 <section id="dashboard" class="hidden space-y-6">
 
-  <!-- FILTER BAR -->
+  <!-- FILTER -->
   <div class="flex flex-col sm:flex-row gap-3">
     <select id="statusFilter"
       class="flex-1 p-3 rounded-xl bg-slate-800 border border-slate-600">
@@ -73,7 +97,7 @@
 </section>
 </div>
 
-<!-- ================= FIREBASE + LOGIC ================= -->
+<!-- ================= FIREBASE ================= -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
@@ -86,7 +110,6 @@ import {
   setPersistence, browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-/* FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyD6UwsVL3aT5PME-gLa1B9v_8GrlRtluIE",
   authDomain: "login-rolebased.firebaseapp.com",
@@ -109,7 +132,6 @@ const list = document.getElementById("list");
 const empty = document.getElementById("empty");
 const statusFilter = document.getElementById("statusFilter");
 const refreshBtn = document.getElementById("refreshBtn");
-const loginError = document.getElementById("loginError");
 
 /* AUTH */
 onAuthStateChanged(auth, user => {
@@ -127,7 +149,6 @@ onAuthStateChanged(auth, user => {
 
 loginForm.onsubmit = async e => {
   e.preventDefault();
-  loginError.classList.add("hidden");
   try {
     await signInWithEmailAndPassword(auth, email.value, password.value);
   } catch (err) {
@@ -143,7 +164,7 @@ async function loadData() {
   list.innerHTML = "";
   empty.classList.add("hidden");
 
-  const q = query(collection(db, "confessions"), orderBy("createdAt", "desc"), limit(50));
+  const q = query(collection(db, "confessions"), orderBy("createdAt","desc"), limit(50));
   const snap = await getDocs(q);
 
   const docs = snap.docs
@@ -188,7 +209,7 @@ function renderCard(d) {
       ${meta("Hint", d.hint)}
     </div>
 
-    <div class="flex flex-wrap gap-3 pt-2">
+    <div class="action-bar">
       <button class="btn bg-emerald-600" data-a="approve">Approve</button>
       <button class="btn bg-amber-600" data-a="reject">Reject</button>
       <button class="btn bg-red-600" data-a="delete">Delete</button>
@@ -215,11 +236,8 @@ To: ${d.to || ""}`;
     }
 
     if (act === "copyall") {
-      await navigator.clipboard.writeText(JSON.stringify({
-        id: d.id,
-        ...d
-      }, null, 2));
-      alert("Full data copied");
+      await navigator.clipboard.writeText(JSON.stringify({ id: d.id, ...d }, null, 2));
+      alert("All data copied");
       return;
     }
 
@@ -241,7 +259,6 @@ To: ${d.to || ""}`;
   list.appendChild(card);
 }
 
-/* HELPERS */
 function meta(label, value) {
   if (!value) return "";
   return `
@@ -261,15 +278,6 @@ function escapeHtml(s) {
 refreshBtn.onclick = loadData;
 statusFilter.onchange = loadData;
 </script>
-
-<style>
-  .btn {
-    padding: 14px 18px;
-    border-radius: 14px;
-    font-weight: 700;
-    font-size: 14px;
-  }
-</style>
 
 </body>
 </html>
