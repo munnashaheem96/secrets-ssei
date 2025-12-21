@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.glass {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.08);
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-xl px-3 py-2 text-xs font-semibold transition;
+}
