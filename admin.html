@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Secrets of SSEI — Admin</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SSEI Admin Panel</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Compiled Tailwind CSS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css">
 
 <style>
@@ -16,110 +13,91 @@
 </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
+<body class="min-h-screen bg-slate-900 text-slate-100">
 
-<div class="max-w-7xl mx-auto px-4 py-8">
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur border-b border-slate-700">
+  <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="text-lg font-bold">SSEI Admin Panel</span>
+      <span class="text-xs px-2 py-0.5 rounded bg-pink-600/20 text-pink-400">
+        Secure
+      </span>
+    </div>
 
-<!-- HEADER -->
-<header class="glass rounded-2xl border border-white/10 shadow-xl p-6 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-  <div>
-    <h1 class="text-2xl font-bold">Secrets of SSEI — Admin</h1>
-    <p class="text-slate-400 text-sm">Moderation dashboard</p>
+    <button
+      id="logoutBtn"
+      class="hidden px-3 py-1.5 text-sm bg-slate-700 hover:bg-slate-600 rounded-lg transition"
+    >
+      Logout
+    </button>
   </div>
-  <div class="flex items-center gap-3">
-    <span id="whoami" class="text-xs text-slate-400"></span>
-    <button id="logoutBtn" class="btn bg-slate-700 hover:bg-slate-600">Logout</button>
-  </div>
-</header>
+</nav>
+
+<div class="max-w-3xl mx-auto p-4">
 
 <!-- LOGIN -->
-<section id="loginCard" class="glass max-w-md mx-auto p-6 rounded-2xl border border-white/10 shadow-xl">
-  <h2 class="text-lg font-semibold mb-4">Admin Login</h2>
+<section id="loginBox" class="bg-slate-800 p-5 rounded-xl">
+  <h2 class="text-lg font-semibold mb-3">Admin Login</h2>
+
   <form id="loginForm" class="space-y-3">
     <input id="email" type="email" placeholder="Email" required
-      class="w-full rounded-xl bg-slate-800/70 p-3 border border-slate-600">
+      class="w-full p-3 rounded bg-slate-700 border border-slate-600">
+
     <input id="password" type="password" placeholder="Password" required
-      class="w-full rounded-xl bg-slate-800/70 p-3 border border-slate-600">
-    <button class="btn w-full bg-pink-600 hover:bg-pink-500">Login</button>
+      class="w-full p-3 rounded bg-slate-700 border border-slate-600">
+
+    <button class="w-full bg-pink-600 py-2 rounded-lg font-semibold">
+      Login
+    </button>
+
     <p id="loginError" class="hidden text-red-400 text-sm"></p>
   </form>
 </section>
 
-<!-- PANEL -->
-<section id="panel" class="hidden space-y-6">
+<!-- DASHBOARD -->
+<section id="dashboard" class="hidden space-y-4">
 
-  <!-- FILTERS -->
-  <div class="glass rounded-2xl border border-white/10 p-4 shadow-lg">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
-      <select id="statusFilter" class="rounded-xl bg-slate-800/70 p-2 border border-slate-600">
-        <option value="all">All</option>
-        <option value="pending" selected>Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-      </select>
+  <!-- FILTER -->
+  <div class="flex gap-2">
+    <select id="statusFilter" class="bg-slate-800 border border-slate-600 p-2 rounded-lg w-full">
+      <option value="all">All</option>
+      <option value="pending" selected>Pending</option>
+      <option value="approved">Approved</option>
+      <option value="rejected">Rejected</option>
+    </select>
 
-      <input id="searchBox" placeholder="Search"
-        class="rounded-xl bg-slate-800/70 p-2 border border-slate-600">
-
-      <button id="refreshBtn"
-        class="btn bg-slate-700 hover:bg-slate-600 sm:col-span-2 md:col-span-1">
-        Refresh
-      </button>
-    </div>
+    <button id="refreshBtn" class="px-4 bg-slate-700 rounded-lg">Refresh</button>
   </div>
 
-  <!-- LIST HEADER -->
-  <div class="flex items-center justify-between">
-    <h3 class="text-lg font-semibold">Submissions</h3>
-    <button id="loadMoreBtn" class="btn bg-slate-700 hover:bg-slate-600">Load More</button>
-  </div>
+  <!-- LIST -->
+  <div id="list" class="space-y-4"></div>
 
-  <!-- DESKTOP TABLE -->
-  <div class="hidden md:block glass rounded-2xl border border-white/10 overflow-x-auto shadow-xl">
-    <table class="min-w-full text-sm">
-      <thead class="bg-slate-800/70">
-        <tr>
-          <th class="p-4 text-left">Created</th>
-          <th class="p-4 text-left">Secret</th>
-          <th class="p-4 text-left">From</th>
-          <th class="p-4 text-left">To</th>
-          <th class="p-4 text-left">Hint</th>
-          <th class="p-4 text-left">Status</th>
-          <th class="p-4 text-left">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="rows" class="divide-y divide-slate-700"></tbody>
-    </table>
-  </div>
-
-  <!-- MOBILE -->
-  <div id="mobileCards" class="md:hidden space-y-4"></div>
-
-  <p id="emptyState" class="hidden text-center text-slate-400">No submissions.</p>
+  <p id="empty" class="hidden text-center text-slate-400 text-sm">
+    No confessions available
+  </p>
 
 </section>
+
 </div>
 
 <!-- ================= FIREBASE + LOGIC ================= -->
 <script type="module">
-/* ================= DOM ================= */
-const loginCard = document.getElementById("loginCard");
-const panel = document.getElementById("panel");
-const whoami = document.getElementById("whoami");
-const loginForm = document.getElementById("loginForm");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const loginError = document.getElementById("loginError");
-const logoutBtn = document.getElementById("logoutBtn");
-const rows = document.getElementById("rows");
-const cards = document.getElementById("mobileCards");
-const emptyState = document.getElementById("emptyState");
-const statusFilter = document.getElementById("statusFilter");
-const searchBox = document.getElementById("searchBox");
-const refreshBtn = document.getElementById("refreshBtn");
-const loadMoreBtn = document.getElementById("loadMoreBtn");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore, collection, query, orderBy, limit,
+  getDocs, updateDoc, deleteDoc, doc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-/* ================= FIREBASE ================= */
+/* CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyD6UwsVL3aT5PME-gLa1B9v_8GrlRtluIE",
   authDomain: "login-rolebased.firebaseapp.com",
@@ -129,133 +107,180 @@ const firebaseConfig = {
   appId: "1:689470574394:web:1b51f731ce4ba7f16dca03"
 };
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getFirestore, collection, query, where, orderBy, limit,
-  startAfter, getDocs, updateDoc, deleteDoc, doc, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import {
-  getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-/* ================= AUTH ================= */
+await setPersistence(auth, browserLocalPersistence);
+
+/* DOM */
+const loginBox = document.getElementById("loginBox");
+const dashboard = document.getElementById("dashboard");
+const loginForm = document.getElementById("loginForm");
+const loginError = document.getElementById("loginError");
+const logoutBtn = document.getElementById("logoutBtn");
+const list = document.getElementById("list");
+const empty = document.getElementById("empty");
+const statusFilter = document.getElementById("statusFilter");
+const refreshBtn = document.getElementById("refreshBtn");
+
+/* AUTH */
 onAuthStateChanged(auth, user => {
-  if (user) {
-    loginCard.classList.add("hidden");
-    panel.classList.remove("hidden");
-    whoami.textContent = user.email;
-    resetAndLoad();
+  if (user && !user.isAnonymous) {
+    loginBox.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+    logoutBtn.classList.remove("hidden");
+    loadData();
   } else {
-    panel.classList.add("hidden");
-    loginCard.classList.remove("hidden");
+    dashboard.classList.add("hidden");
+    loginBox.classList.remove("hidden");
+    logoutBtn.classList.add("hidden");
   }
 });
 
-loginForm.addEventListener("submit", async e => {
+loginForm.onsubmit = async e => {
   e.preventDefault();
   loginError.classList.add("hidden");
+
   try {
     await signInWithEmailAndPassword(auth, email.value, password.value);
   } catch (err) {
     loginError.textContent = err.message;
     loginError.classList.remove("hidden");
   }
-});
+};
 
 logoutBtn.onclick = () => signOut(auth);
 
-/* ================= DATA ================= */
-let lastDoc = null;
-let currentSnapshot = [];
-const PAGE_SIZE = 20;
+/* LOAD DATA */
+async function loadData() {
+  list.innerHTML = "";
+  empty.classList.add("hidden");
 
-async function buildQuery(reset = false) {
-  let filters = [orderBy("createdAt", "desc"), limit(PAGE_SIZE)];
-  if (statusFilter.value !== "all")
-    filters.unshift(where("status", "==", statusFilter.value));
-  if (!reset && lastDoc) filters.push(startAfter(lastDoc));
-  return query(collection(db, "confessions"), ...filters);
-}
+  const q = query(
+    collection(db, "confessions"),
+    orderBy("createdAt"),
+    limit(50)
+  );
 
-async function resetAndLoad() {
-  rows.innerHTML = "";
-  cards.innerHTML = "";
-  currentSnapshot = [];
-  lastDoc = null;
-  await loadMore(true);
-}
+  const snap = await getDocs(q);
 
-async function loadMore(reset = false) {
-  const snap = await getDocs(await buildQuery(reset));
-  const docs = snap.docs;
-  if (docs.length) lastDoc = docs[docs.length - 1];
-  currentSnapshot = currentSnapshot.concat(docs);
-  renderData(docs);
-}
+  const docs = snap.docs
+    .map(d => ({ id: d.id, ...d.data() }))
+    .filter(d => statusFilter.value === "all" || d.status === statusFilter.value)
+    .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
 
-/* ================= RENDER ================= */
-function renderData(docs) {
-  emptyState.classList.toggle("hidden", docs.length || currentSnapshot.length);
-  const q = (searchBox.value || "").toLowerCase();
-
-  docs.filter(d => {
-    const x = d.data();
-    return `${x.secret} ${x.hint} ${x.from || ""} ${x.to || ""}`.toLowerCase().includes(q);
-  }).forEach(d => {
-    const x = d.data();
-    rows.innerHTML += `
-      <tr>
-        <td class="p-4 text-slate-400">${fmt(x.createdAt)}</td>
-        <td class="p-4">${esc(x.secret)}</td>
-        <td class="p-4">${esc(x.from || "")}</td>
-        <td class="p-4">${esc(x.to || "")}</td>
-        <td class="p-4">${esc(x.hint || "")}</td>
-        <td class="p-4"><span class="px-2 py-1 rounded text-xs ${color(x.status)}">${x.status}</span></td>
-        <td class="p-4 flex gap-1">
-          <button class="btn bg-emerald-600" data-act="approve" data-id="${d.id}">Approve</button>
-          <button class="btn bg-amber-600" data-act="reject" data-id="${d.id}">Reject</button>
-          <button class="btn bg-red-600 hover:bg-red-500" data-act="delete" data-id="${d.id}">Delete</button>
-        </td>
-      </tr>`;
-  });
-}
-
-/* ================= ACTIONS ================= */
-document.body.addEventListener("click", async e => {
-  const b = e.target.closest("button[data-act]");
-  if (!b) return;
-
-  const id = b.dataset.id;
-  const act = b.dataset.act;
-
-  if (act === "delete") {
-    if (!confirm("Delete permanently?")) return;
-    await deleteDoc(doc(db, "confessions", id));
-    resetAndLoad();
+  if (!docs.length) {
+    empty.classList.remove("hidden");
     return;
   }
 
-  if (act === "approve" || act === "reject") {
-    await updateDoc(doc(db, "confessions", id), {
-      status: act === "approve" ? "approved" : "rejected",
-      moderatedAt: serverTimestamp()
-    });
-    resetAndLoad();
-  }
-});
+  docs.forEach(d => renderCard(d));
+}
 
-/* ================= HELPERS ================= */
-const fmt = ts => ts ? (ts.toDate ? ts.toDate() : new Date(ts)).toLocaleString() : "-";
-const esc = s => String(s).replace(/[&<>"]/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[m]));
-const color = s => s === "approved" ? "bg-emerald-800/60" : s === "rejected" ? "bg-amber-800/60" : "bg-slate-700/60";
+/* RENDER CARD */
+function renderCard(d) {
+  const div = document.createElement("div");
+  div.className = "bg-slate-800 border border-slate-700 rounded-xl p-4 space-y-3";
 
-refreshBtn.onclick = resetAndLoad;
-loadMoreBtn.onclick = () => loadMore(false);
-searchBox.onkeydown = e => e.key === "Enter" && resetAndLoad();
+  const badge =
+    d.status === "approved" ? "bg-emerald-500/20 text-emerald-300" :
+    d.status === "rejected" ? "bg-red-500/20 text-red-300" :
+    "bg-yellow-500/20 text-yellow-300";
+
+  div.innerHTML = `
+    <div class="flex justify-between items-center">
+      <span class="px-2 py-0.5 rounded-full text-xs ${badge}">
+        ${d.status || "pending"}
+      </span>
+      <span class="text-xs text-slate-400">
+        ${d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleString() : "—"}
+      </span>
+    </div>
+
+    ${field("Document ID", d.id)}
+    ${field("Secret", d.secret)}
+    ${field("From", d.from)}
+    ${field("To", d.to)}
+    ${field("Hint", d.hint)}
+    ${field("User Agent (UA)", d.ua)}
+
+    <div class="flex flex-wrap gap-2 pt-2">
+      <button class="px-3 py-1.5 bg-emerald-600 rounded-lg text-xs" data-a="approve">Approve</button>
+      <button class="px-3 py-1.5 bg-amber-600 rounded-lg text-xs" data-a="reject">Reject</button>
+      <button class="px-3 py-1.5 bg-red-600 rounded-lg text-xs" data-a="delete">Delete</button>
+      <button class="px-3 py-1.5 bg-blue-600 rounded-lg text-xs" data-a="copyall">
+        Copy All (JSON)
+      </button>
+    </div>
+  `;
+
+  div.onclick = async e => {
+    const act = e.target.dataset.a;
+    if (!act) return;
+
+    if (act === "copyall") {
+      const fullJson = {
+        documentId: d.id,
+        secret: d.secret,
+        from: d.from,
+        to: d.to,
+        hint: d.hint,
+        status: d.status,
+        ua: d.ua,
+        createdAt: d.createdAt
+      };
+
+      await navigator.clipboard.writeText(
+        JSON.stringify(fullJson, null, 2)
+      );
+      alert("Full JSON copied");
+      return;
+    }
+
+    if (act === "delete" && !confirm("Delete permanently?")) return;
+
+    if (act === "approve" || act === "reject") {
+      await updateDoc(doc(db, "confessions", d.id), {
+        status: act === "approve" ? "approved" : "rejected"
+      });
+    }
+
+    if (act === "delete") {
+      await deleteDoc(doc(db, "confessions", d.id));
+    }
+
+    loadData();
+  };
+
+  list.appendChild(div);
+}
+
+/* FIELD */
+function field(label, value = "") {
+  if (!value) return "";
+  return `
+    <div class="text-sm">
+      <span class="text-slate-400">${label}</span>
+      <div class="bg-slate-900 rounded p-2 mt-1 text-xs break-all">
+        ${escapeHtml(value.toString())}
+      </div>
+    </div>
+  `;
+}
+
+/* UTIL */
+function escapeHtml(s = "") {
+  return s.replace(/[&<>"]/g, c => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;"
+  }[c]));
+}
+
+refreshBtn.onclick = loadData;
+statusFilter.onchange = loadData;
 </script>
 
 </body>
