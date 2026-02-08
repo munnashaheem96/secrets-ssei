@@ -1,236 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
-  <title>Secrets of SSEI — Anonymous Confessions</title>
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    html, body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
-    .glass { backdrop-filter: blur(10px); background: rgba(255,255,255,0.08); }
-  </style>
-  <!-- Open Graph for sharing -->
-  <meta property="og:title" content="Secrets of SSEI — Anonymous Confessions" />
-  <meta property="og:description" content="Drop your secret anonymously. We'll share selected ones on Instagram: @secrets.of.ssei" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://secrets.justsomemallus.in" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>💖 Secrets of SSEI — Valentine Week</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Poppins,system-ui;
+  background:linear-gradient(270deg,#2b0012,#5a001f,#1a000a);
+  background-size:600% 600%;
+  animation:bgFlow 18s ease infinite;
+  color:#ffe6ee;
+  overflow-x:hidden;
+}
+
+@keyframes bgFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.container{
+  max-width:760px;
+  margin:auto;
+  padding:3rem 1.2rem;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.45rem .9rem;
+  border-radius:999px;
+  font-size:.75rem;
+  background:rgba(255,64,129,.2);
+  border:1px solid rgba(255,128,171,.5);
+  box-shadow:0 0 15px rgba(255,64,129,.4);
+}
+
+.pulse{
+  width:.55rem;
+  height:.55rem;
+  border-radius:50%;
+  background:#ff4f81;
+  animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{50%{opacity:.4}}
+
+h1{
+  margin-top:1.2rem;
+  font-size:2.6rem;
+  font-weight:700;
+  background:linear-gradient(to right,#ff9ebc,#ff4f81);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+header p{color:#ffc1d1}
+
+.glass{
+  margin-top:2.5rem;
+  padding:2.2rem;
+  border-radius:1.4rem;
+  background:linear-gradient(
+    135deg,
+    rgba(255,182,193,.18),
+    rgba(255,20,147,.08)
+  );
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,182,193,.35);
+  box-shadow:
+    0 0 30px rgba(255,20,147,.25),
+    inset 0 0 25px rgba(255,255,255,.05);
+}
+
+label{
+  font-size:.8rem;
+  font-weight:500;
+}
+
+textarea,input{
+  width:100%;
+  margin-top:.4rem;
+  padding:.85rem 1rem;
+  border-radius:.9rem;
+  border:1px solid rgba(255,182,193,.45);
+  background:rgba(25,0,12,.65);
+  color:#ffe6ee;
+  outline:none;
+  transition:.25s;
+}
+
+textarea:focus,input:focus{
+  border-color:#ff4f81;
+  box-shadow:0 0 0 2px rgba(255,79,129,.45),
+             0 0 18px rgba(255,79,129,.35);
+}
+
+.grid{
+  display:grid;
+  gap:1.2rem;
+}
+
+@media(min-width:768px){
+  .grid{grid-template-columns:1fr 1fr}
+}
+
+.btn{
+  margin-top:1.6rem;
+  width:100%;
+  padding:1rem;
+  border-radius:1rem;
+  border:none;
+  font-size:.95rem;
+  font-weight:600;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ff4f81,#ff2e63);
+  box-shadow:0 10px 30px rgba(255,46,99,.45);
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 15px 40px rgba(255,46,99,.6);
+}
+
+.btn:disabled{opacity:.6}
+
+.status{
+  margin-top:.8rem;
+  font-size:.85rem;
+}
+
+footer{
+  text-align:center;
+  margin-top:2.8rem;
+  font-size:.75rem;
+  color:#ffb3c7;
+}
+
+/* Floating hearts */
+.heart{
+  position:fixed;
+  bottom:10px;
+  font-size:18px;
+  animation:floatUp 4s linear forwards;
+  pointer-events:none;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0) scale(.8);opacity:0}
+  20%{opacity:.9}
+  100%{transform:translateY(-140px) scale(1.2);opacity:0}
+}
+</style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
-  <div class="max-w-3xl mx-auto px-4 py-10">
-    <header class="text-center mb-8">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs bg-slate-700/50 border border-slate-600">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Anonymous & secure — we don’t collect names or IPs
-      </div>
-      <h1 class="text-3xl md:text-4xl font-bold mt-4">Secrets of SSEI</h1>
-      <p class="text-slate-300 mt-2">Drop your secret <em>anonymously</em>. Selected secrets will be posted on
-        <a href="https://instagram.com/secrets.of.ssei" target="_blank" rel="noopener" class="underline decoration-dotted hover:text-white">@secrets.of.ssei</a>.
-      </p>
-    </header>
 
-    <main class="glass rounded-2xl p-6 md:p-8 border border-white/10 shadow-xl">
-      <form id="confessionForm" class="space-y-6" autocomplete="off" novalidate>
-        <!-- honeypot -->
-        <input type="text" name="website" id="website" class="hidden" tabindex="-1" autocomplete="off" />
+<body>
 
-        <div>
-          <label for="secret" class="block text-sm font-medium mb-1">Secret <span class="text-pink-400">*</span></label>
-          <textarea id="secret" name="secret" required minlength="10" maxlength="1000" rows="5"
-            class="w-full rounded-xl border border-slate-600 bg-slate-800/70 p-3 outline-none focus:ring-2 focus:ring-pink-500/60"
-            placeholder="Write your secret… (min 10 characters)"></textarea>
-          <div class="flex justify-between text-xs mt-1 text-slate-400">
-            <span>Keep it respectful. No hate speech or personal data.</span>
-            <span id="secretCount">0/1000</span>
-          </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-4">
-          <div>
-            <label for="from" class="block text-sm font-medium mb-1">From (optional)</label>
-            <input id="from" name="from" type="text" maxlength="50" class="w-full rounded-xl border border-slate-600 bg-slate-800/70 p-3 outline-none focus:ring-2 focus:ring-pink-500/60" placeholder="e.g., 3rd year CSE" />
-          </div>
-          <div>
-            <label for="to" class="block text-sm font-medium mb-1">To (optional)</label>
-            <input id="to" name="to" type="text" maxlength="50" class="w-full rounded-xl border border-slate-600 bg-slate-800/70 p-3 outline-none focus:ring-2 focus:ring-pink-500/60" placeholder="e.g., Someone special" />
-          </div>
-        </div>
-
-        <div>
-          <label for="hint" class="block text-sm font-medium mb-1">Hint <span class="text-pink-400">*</span></label>
-          <input id="hint" name="hint" type="text" required minlength="3" maxlength="100"
-            class="w-full rounded-xl border border-slate-600 bg-slate-800/70 p-3 outline-none focus:ring-2 focus:ring-pink-500/60"
-            placeholder="Give a small hint, not personal info" />
-          <p class="text-xs text-slate-400 mt-1">Example: “lab partner from ECE”, “met at canteen”, etc.</p>
-        </div>
-
-        <div class="flex items-center gap-2 text-xs text-slate-400">
-          <input id="agree" type="checkbox" class="rounded border-slate-600 bg-slate-800/70" required />
-          <label for="agree">I understand my submission may be moderated before posting.</label>
-        </div>
-
-        <button id="submitBtn" type="submit" class="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 bg-pink-600 hover:bg-pink-500 active:scale-[.99] disabled:opacity-60 disabled:cursor-not-allowed font-semibold">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M2.3 2.3a1 1 0 0 1 1.04-.24l18 6a1 1 0 0 1 0 1.88l-7.58 2.84-2.84 7.58a1 1 0 0 1-1.88 0l-6-18a1 1 0 0 1 .26-1.06Zm3.2 3.2 4.3 12.9 2.06-5.5a1 1 0 0 1 .6-.6L18.6 10.2l-13.1-4.7Z"/></svg>
-          Submit Secret
-        </button>
-
-        <p id="statusMsg" class="hidden text-sm"></p>
-      </form>
-
-      <p class="text-xs text-slate-400 mt-6">Privacy: We use anonymous authentication and do not store names, emails, phone numbers, or IP addresses. Don’t include anyone’s personal data in the message.</p>
-    </main>
-
-    <footer class="text-center text-xs text-slate-400 mt-8">
-      &copy; <span id="year"></span> Secrets of SSEI • Hosted at <span class="font-medium">secrets.justsomemallus.in</span>
-    </footer>
+<div class="container">
+<header style="text-align:center">
+  <div class="badge">
+    <span class="pulse"></span>
+    <span id="valentineDayText">Valentine Week 💖</span>
   </div>
 
-  <!-- Firebase SDKs (v10+) -->
-  <script type="module">
-    // --- OPTIONAL: Remove this block if you use a different backend service ---
-    // Replace with your Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyD6UwsVL3aT5PME-gLa1B9v_8GrlRtluIE",
-      authDomain: "login-rolebased.firebaseapp.com",
-      projectId: "login-rolebased",
-      storageBucket: "login-rolebased.firebasestorage.app",
-      messagingSenderId: "689470574394",
-      appId: "1:689470574394:web:1b51f731ce4ba7f16dca03"
-    };
+  <h1>Secrets of SSEI</h1>
 
-    // Import Firebase modules
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-    import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
-    import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+  <p id="valentineDesc">
+    Say what your heart never dared to 💌<br>
+    Confess anonymously. Selected ones appear on <b>@secrets.of.ssei</b>
+  </p>
+</header>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
+<main class="glass">
+<form id="confessionForm" novalidate>
+<input id="website" style="display:none">
 
-    // Ensure anonymous sign-in
-    signInAnonymously(auth).catch(console.error);
+<label>Secret *</label>
+<textarea id="secret" rows="5" minlength="10" maxlength="1000"
+placeholder="I’ve loved you silently for a long time… 💕"></textarea>
 
-    // UI Elements
-    const form = document.getElementById('confessionForm');
-    const btn = document.getElementById('submitBtn');
-    const statusMsg = document.getElementById('statusMsg');
-    const secret = document.getElementById('secret');
-    const hint = document.getElementById('hint');
-    const fromEl = document.getElementById('from');
-    const toEl = document.getElementById('to');
-    const secretCount = document.getElementById('secretCount');
-    const year = document.getElementById('year');
-    year.textContent = new Date().getFullYear();
+<div style="display:flex;justify-content:space-between;font-size:.7rem">
+<span>Be kind. No personal info.</span>
+<span id="secretCount">0/1000</span>
+</div>
 
-    // Live character counter
-    secret.addEventListener('input', () => {
-      secretCount.textContent = `${secret.value.length}/1000`;
-    });
+<div class="grid" style="margin-top:1.2rem">
+<div>
+<label>From</label>
+<input id="from" placeholder="Someone from your class 👀">
+</div>
+<div>
+<label>To</label>
+<input id="to" placeholder="That special person 💖">
+</div>
+</div>
 
-    // Basic profanity blocklist (very light). Consider replacing with server-side moderation.
-    const badWords = ["suicide","kill","murder","hate","rape"]; // simple example
-    function containsBadWords(text) {
-      const lower = text.toLowerCase();
-      return badWords.some(w => lower.includes(w));
-    }
+<label style="margin-top:1.2rem;display:block">Hint *</label>
+<input id="hint" minlength="3" placeholder="Met in canteen ☕">
 
-    // Submit handler
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+<div style="margin-top:1rem;font-size:.75rem">
+<input type="checkbox" id="agree" required>
+<label for="agree"> I understand submissions are moderated.</label>
+</div>
 
-      // Honeypot check
-      if (document.getElementById('website').value) return; // bot
+<button class="btn" id="submitBtn">💌 Send My Confession</button>
+<p id="statusMsg" class="status"></p>
+</form>
+</main>
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
+<footer>
+© <span id="year"></span> Secrets of SSEI • Valentine Special 🌹
+</footer>
+</div>
 
-      if (containsBadWords(secret.value)) {
-        showStatus('Your message contains disallowed words. Please rephrase.', true);
-        return;
-      }
+<!-- FLOATING HEARTS -->
+<script>
+setInterval(() => {
+  const h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  h.textContent=Math.random()>.5?"💖":"💘";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+},900);
+</script>
 
-      btn.disabled = true;
-      showStatus('Submitting…');
+<!-- 🔥 VALENTINE WEEK AUTO DAY LOGIC -->
+<script>
+(function(){
+  const today=new Date();
+  const month=today.getMonth(); // Feb = 1
+  const date=today.getDate();
 
-      try {
-        // Wait for anonymous auth just in case
-        await new Promise((resolve) => {
-          const unsub = onAuthStateChanged(auth, (u) => { if (u) { unsub(); resolve(); } });
-        });
+  const days={
+    7:{name:"Rose Day",emoji:"🌹",text:"Send love without words."},
+    8:{name:"Propose Day",emoji:"💍",text:"Confess your feelings today."},
+    9:{name:"Chocolate Day",emoji:"🍫",text:"Sweeten someone’s heart."},
+    10:{name:"Teddy Day",emoji:"🧸",text:"Cute love deserves warmth."},
+    11:{name:"Promise Day",emoji:"🤝",text:"Promises speak louder."},
+    12:{name:"Hug Day",emoji:"🤗",text:"A hug says everything."},
+    13:{name:"Kiss Day",emoji:"😘",text:"Express love gently."},
+    14:{name:"Valentine’s Day",emoji:"❤️",text:"Celebrate love today."}
+  };
 
-        // Save to Firestore (no IP collected)
-        await addDoc(collection(db, 'confessions'), {
-          secret: secret.value.trim(),
-          from: (fromEl.value || '').trim(),
-          to: (toEl.value || '').trim(),
-          hint: hint.value.trim(),
-          ua: navigator.userAgent.slice(0, 120), // harmless metadata
-          createdAt: serverTimestamp(),
-          status: 'pending' // for moderation pipeline
-        });
+  const badge=document.getElementById("valentineDayText");
+  const desc=document.getElementById("valentineDesc");
+  const btn=document.getElementById("submitBtn");
 
-        form.reset();
-        secretCount.textContent = '0/1000';
-        showStatus('✅ Submitted anonymously! Thanks.');
-      } catch (err) {
-        console.error(err);
-        showStatus('Something went wrong. Please try again later.', true);
-      } finally {
-        btn.disabled = false;
-      }
-    });
-
-    function showStatus(msg, isError = false) {
-      statusMsg.classList.remove('hidden');
-      statusMsg.textContent = msg;
-      statusMsg.className = `text-sm mt-2 ${isError ? 'text-red-400' : 'text-emerald-300'}`;
-    }
-  </script>
-
-  <!-- If you prefer a no-backend option, comment out the Firebase script above and paste a Formspree/Basin endpoint here. -->
-</body>
-  
-</html>
-
-<!-- ========================= ADMIN PAGE (SAVE AS admin.html) ========================= -->
-<!--
-  Create a new file named `admin.html` with the contents below.
-  This page is protected by Firebase Email/Password auth. Only signed-in users can view/update.
-  See the Firestore security rules after this file to restrict write access to specific admin UIDs.
--->
-
-
-
-<!-- ========================= FIRESTORE SECURITY RULES ========================= -->
-<!-- Paste the following in Firestore Rules to restrict write actions to admin users only. -->
-<!--
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    // Public can create (from the public form), cannot read.
-    match /confessions/{docId} {
-      allow create: if request.time < timestamp.date(2100,1,1)
-        && request.resource.data.secret is string
-        && request.resource.data.hint is string
-        && request.resource.data.secret.size() >= 10
-        && request.resource.data.secret.size() <= 1000
-        && request.resource.data.hint.size() >= 3
-        && request.resource.data.hint.size() <= 100
-        && !(request.resource.data.keys().hasAny(['ip','email','phone']));
-      allow read: if false; // hide raw submissions from public
-      allow update, delete: if request.auth != null &&
-        request.auth.uid in [
-          // TODO: Replace with your Firebase Auth user IDs allowed to moderate
-          'ADMIN_UID_1', 'ADMIN_UID_2'
-        ];
-    }
+  if(month===1 && days[date]){
+    const d=days[date];
+    badge.textContent=`Valentine Week 💖 • ${d.name} ${d.emoji}`;
+    desc.innerHTML=`
+      <b>${d.name}</b> ${d.emoji}<br>
+      ${d.text} 💌<br>
+      Confess anonymously. Selected ones appear on <b>@secrets.of.ssei</b>
+    `;
+    btn.textContent=`${d.emoji} Send on ${d.name}`;
   }
-}
--->
+})();
+</script>
+
+<!-- 🔐 FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyD6UwsVL3aT5PME-gLa1B9v_8GrlRtluIE",
+  authDomain:"login-rolebased.firebaseapp.com",
+  projectId:"login-rolebased",
+  storageBucket:"login-rolebased.firebasestorage.app",
+  messagingSenderId:"689470574394",
+  appId:"1:689470574394:web:1b51f731ce4ba7f16dca03"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const auth=getAuth(app);
+signInAnonymously(auth);
+
+const form=document.getElementById("confessionForm");
+const secret=document.getElementById("secret");
+const count=document.getElementById("secretCount");
+const status=document.getElementById("statusMsg");
+const btn=document.getElementById("submitBtn");
+
+document.getElementById("year").textContent=new Date().getFullYear();
+
+secret.addEventListener("input",()=>{
+  count.textContent=`${secret.value.length}/1000`;
+});
+
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(website.value)return;
+  if(!form.checkValidity())return form.reportValidity();
+
+  btn.disabled=true;
+  status.textContent="Sending love… 💞";
+
+  try{
+    await new Promise(r=>onAuthStateChanged(auth,u=>u&&r()));
+    await addDoc(collection(db,"confessions"),{
+      secret:secret.value.trim(),
+      from:from.value.trim(),
+      to:to.value.trim(),
+      hint:hint.value.trim(),
+      createdAt:serverTimestamp(),
+      status:"pending"
+    });
+    form.reset();
+    count.textContent="0/1000";
+    status.textContent="💖 Confession sent successfully!";
+  }catch{
+    status.textContent="💔 Failed. Try again later.";
+  }finally{
+    btn.disabled=false;
+  }
+});
+</script>
+
+</body>
+</html>
