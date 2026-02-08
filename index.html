@@ -194,7 +194,6 @@ footer{
 placeholder="I’ve loved you silently for a long time… 💕"></textarea>
 
 <div style="display:flex;justify-content:space-between;font-size:.7rem">
-<span>Be kind. No personal info.</span>
 <span id="secretCount">0/1000</span>
 </div>
 
@@ -211,11 +210,6 @@ placeholder="I’ve loved you silently for a long time… 💕"></textarea>
 
 <label style="margin-top:1.2rem;display:block">Hint *</label>
 <input id="hint" minlength="3" placeholder="Met in canteen ☕">
-
-<div style="margin-top:1rem;font-size:.75rem">
-<input type="checkbox" id="agree" required>
-<label for="agree"> I understand submissions are moderated.</label>
-</div>
 
 <button class="btn" id="submitBtn">💌 Send My Confession</button>
 <p id="statusMsg" class="status"></p>
@@ -239,11 +233,11 @@ setInterval(() => {
 },900);
 </script>
 
-<!-- 🔥 VALENTINE WEEK AUTO DAY LOGIC -->
+<!-- 💘 VALENTINE WEEK AUTO DAY LOGIC -->
 <script>
 (function(){
   const today=new Date();
-  const month=today.getMonth(); // Feb = 1
+  const month=today.getMonth();
   const date=today.getDate();
 
   const days={
