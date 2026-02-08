@@ -12,7 +12,6 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
   min-height:100vh;
@@ -23,19 +22,16 @@ body{
   color:#ffe6ee;
   overflow-x:hidden;
 }
-
 @keyframes bgFlow{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
-
 .container{
   max-width:760px;
   margin:auto;
   padding:3rem 1.2rem;
 }
-
 .badge{
   display:inline-flex;
   align-items:center;
@@ -47,119 +43,54 @@ body{
   border:1px solid rgba(255,128,171,.5);
   box-shadow:0 0 15px rgba(255,64,129,.4);
 }
-
 .pulse{
-  width:.55rem;
-  height:.55rem;
-  border-radius:50%;
-  background:#ff4f81;
-  animation:pulse 1.8s infinite;
+  width:.55rem;height:.55rem;border-radius:50%;
+  background:#ff4f81;animation:pulse 1.8s infinite;
 }
-
 @keyframes pulse{50%{opacity:.4}}
-
 h1{
-  margin-top:1.2rem;
-  font-size:2.6rem;
-  font-weight:700;
+  margin-top:1.2rem;font-size:2.6rem;font-weight:700;
   background:linear-gradient(to right,#ff9ebc,#ff4f81);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-
 header p{color:#ffc1d1}
-
 .glass{
-  margin-top:2.5rem;
-  padding:2.2rem;
-  border-radius:1.4rem;
-  background:linear-gradient(
-    135deg,
-    rgba(255,182,193,.18),
-    rgba(255,20,147,.08)
-  );
+  margin-top:2.5rem;padding:2.2rem;border-radius:1.4rem;
+  background:linear-gradient(135deg,rgba(255,182,193,.18),rgba(255,20,147,.08));
   backdrop-filter:blur(18px);
   border:1px solid rgba(255,182,193,.35);
-  box-shadow:
-    0 0 30px rgba(255,20,147,.25),
-    inset 0 0 25px rgba(255,255,255,.05);
+  box-shadow:0 0 30px rgba(255,20,147,.25), inset 0 0 25px rgba(255,255,255,.05);
 }
-
-label{
-  font-size:.8rem;
-  font-weight:500;
-}
-
+label{font-size:.8rem;font-weight:500}
 textarea,input{
-  width:100%;
-  margin-top:.4rem;
-  padding:.85rem 1rem;
-  border-radius:.9rem;
-  border:1px solid rgba(255,182,193,.45);
-  background:rgba(25,0,12,.65);
-  color:#ffe6ee;
-  outline:none;
-  transition:.25s;
+  width:100%;margin-top:.4rem;padding:.85rem 1rem;
+  border-radius:.9rem;border:1px solid rgba(255,182,193,.45);
+  background:rgba(25,0,12,.65);color:#ffe6ee;
+  outline:none;transition:.25s;
 }
-
 textarea:focus,input:focus{
   border-color:#ff4f81;
-  box-shadow:0 0 0 2px rgba(255,79,129,.45),
-             0 0 18px rgba(255,79,129,.35);
+  box-shadow:0 0 0 2px rgba(255,79,129,.45),0 0 18px rgba(255,79,129,.35);
 }
-
-.grid{
-  display:grid;
-  gap:1.2rem;
-}
-
-@media(min-width:768px){
-  .grid{grid-template-columns:1fr 1fr}
-}
-
+.grid{display:grid;gap:1.2rem}
+@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
 .btn{
-  margin-top:1.6rem;
-  width:100%;
-  padding:1rem;
-  border-radius:1rem;
-  border:none;
-  font-size:.95rem;
-  font-weight:600;
-  color:white;
-  cursor:pointer;
+  margin-top:1.6rem;width:100%;padding:1rem;
+  border-radius:1rem;border:none;font-size:.95rem;font-weight:600;
+  color:white;cursor:pointer;
   background:linear-gradient(135deg,#ff4f81,#ff2e63);
   box-shadow:0 10px 30px rgba(255,46,99,.45);
   transition:.25s;
 }
-
-.btn:hover{
-  transform:translateY(-1px);
-  box-shadow:0 15px 40px rgba(255,46,99,.6);
-}
-
+.btn:hover{transform:translateY(-1px);box-shadow:0 15px 40px rgba(255,46,99,.6)}
 .btn:disabled{opacity:.6}
-
-.status{
-  margin-top:.8rem;
-  font-size:.85rem;
-}
-
-footer{
-  text-align:center;
-  margin-top:2.8rem;
-  font-size:.75rem;
-  color:#ffb3c7;
-}
-
-/* Floating hearts */
+.status{margin-top:.8rem;font-size:.85rem}
+footer{text-align:center;margin-top:2.8rem;font-size:.75rem;color:#ffb3c7}
 .heart{
-  position:fixed;
-  bottom:10px;
-  font-size:18px;
-  animation:floatUp 4s linear forwards;
-  pointer-events:none;
+  position:fixed;bottom:10px;font-size:18px;
+  animation:floatUp 4s linear forwards;pointer-events:none;
 }
-
 @keyframes floatUp{
   0%{transform:translateY(0) scale(.8);opacity:0}
   20%{opacity:.9}
@@ -194,18 +125,19 @@ footer{
 placeholder="I’ve loved you silently for a long time… 💕"></textarea>
 
 <div style="display:flex;justify-content:space-between;font-size:.7rem">
+<span>Be kind. No personal info.</span>
 <span id="secretCount">0/1000</span>
 </div>
 
 <div class="grid" style="margin-top:1.2rem">
-<div>
-<label>From</label>
-<input id="from" placeholder="Someone from your class 👀">
-</div>
-<div>
-<label>To</label>
-<input id="to" placeholder="That special person 💖">
-</div>
+  <div>
+    <label>From</label>
+    <input id="from" placeholder="Someone from your class 👀">
+  </div>
+  <div>
+    <label>To</label>
+    <input id="to" placeholder="That special person 💖">
+  </div>
 </div>
 
 <label style="margin-top:1.2rem;display:block">Hint *</label>
@@ -233,42 +165,33 @@ setInterval(() => {
 },900);
 </script>
 
-<!-- 💘 VALENTINE WEEK AUTO DAY LOGIC -->
+<!-- 💘 AUTO VALENTINE DAY LOGIC -->
 <script>
 (function(){
-  const today=new Date();
-  const month=today.getMonth();
-  const date=today.getDate();
-
+  const t=new Date(),m=t.getMonth(),d=t.getDate();
   const days={
-    7:{name:"Rose Day",emoji:"🌹",text:"Send love without words."},
-    8:{name:"Propose Day",emoji:"💍",text:"Confess your feelings today."},
-    9:{name:"Chocolate Day",emoji:"🍫",text:"Sweeten someone’s heart."},
-    10:{name:"Teddy Day",emoji:"🧸",text:"Cute love deserves warmth."},
-    11:{name:"Promise Day",emoji:"🤝",text:"Promises speak louder."},
-    12:{name:"Hug Day",emoji:"🤗",text:"A hug says everything."},
-    13:{name:"Kiss Day",emoji:"😘",text:"Express love gently."},
-    14:{name:"Valentine’s Day",emoji:"❤️",text:"Celebrate love today."}
+    7:{n:"Rose Day",e:"🌹",t:"Send love without words."},
+    8:{n:"Propose Day",e:"💍",t:"Confess your feelings today."},
+    9:{n:"Chocolate Day",e:"🍫",t:"Sweeten someone’s heart."},
+    10:{n:"Teddy Day",e:"🧸",t:"Cute love deserves warmth."},
+    11:{n:"Promise Day",e:"🤝",t:"Promises speak louder."},
+    12:{n:"Hug Day",e:"🤗",t:"A hug says everything."},
+    13:{n:"Kiss Day",e:"😘",t:"Express love gently."},
+    14:{n:"Valentine’s Day",e:"❤️",t:"Celebrate love today."}
   };
-
   const badge=document.getElementById("valentineDayText");
   const desc=document.getElementById("valentineDesc");
   const btn=document.getElementById("submitBtn");
-
-  if(month===1 && days[date]){
-    const d=days[date];
-    badge.textContent=`Valentine Week 💖 • ${d.name} ${d.emoji}`;
-    desc.innerHTML=`
-      <b>${d.name}</b> ${d.emoji}<br>
-      ${d.text} 💌<br>
-      Confess anonymously. Selected ones appear on <b>@secrets.of.ssei</b>
-    `;
-    btn.textContent=`${d.emoji} Send on ${d.name}`;
+  if(m===1 && days[d]){
+    const x=days[d];
+    badge.textContent=`Valentine Week 💖 • ${x.n} ${x.e}`;
+    desc.innerHTML=`<b>${x.n}</b> ${x.e}<br>${x.t} 💌<br>Confess anonymously. Selected ones appear on <b>@secrets.of.ssei</b>`;
+    btn.textContent=`${x.e} Send on ${x.n}`;
   }
 })();
 </script>
 
-<!-- 🔐 FIREBASE -->
+<!-- 🔐 FIREBASE + UA -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -315,6 +238,7 @@ form.addEventListener("submit",async e=>{
       from:from.value.trim(),
       to:to.value.trim(),
       hint:hint.value.trim(),
+      ua:navigator.userAgent.slice(0,150), // ✅ UA added
       createdAt:serverTimestamp(),
       status:"pending"
     });
